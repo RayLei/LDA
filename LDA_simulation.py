@@ -9,14 +9,20 @@ Created on Thu Jan 11 17:04:12 2018
 import numpy as np
 import lda
 
-
+# --------------------------
+# Create a dataset
+# --------------------------
 vocab=['law','finance','math','physics','art']
 topic_num=5
 
 dat_matrix=np.ones((10,5),dtype=int)*200
 rand_mat=np.random.randint(0,11,(10,5),dtype=int)
-dat_mat=dat_matrix+rand_mat                  
+dat_mat=dat_matrix+rand_mat   
 
+
+# -------------------------
+# Fit LDA model
+# -------------------------
 model=lda.LDA(n_topics=topic_num, n_iter=1500, random_state=1)
 model.fit(dat_mat)
 
@@ -27,7 +33,9 @@ for i, topic_dist in enumerate(topic_word):
     topic_words=np.array(vocab)[np.argsort(topic_dist)][:-(n_top_words+1):-1]
     print('Topic {}: {}'.format(i, ' '.join(topic_words)))
     
-    
+# ------------------------------------
+# Different Term-frequency simulation 
+# ------------------------------------   
 dat_mat2=np.ones((2,5),dtype=int)*200
 dat_mat2[:,4]=np.random.randint(1,11,2)
 
